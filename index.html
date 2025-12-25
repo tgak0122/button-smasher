@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Button Smasher</title>
+<style>
+  body {
+    background: #000;
+    color: white;
+    font-family: Arial Black, Arial, sans-serif;
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  h1 {
+    color: red;
+    font-size: 40px;
+  }
+
+  button {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 20px 40px;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 0 20px red;
+  }
+
+  button:disabled {
+    background: darkred;
+    cursor: not-allowed;
+  }
+
+  .stat {
+    font-size: 22px;
+    margin: 8px;
+  }
+
+  #shop {
+    margin-top: 30px;
+    border-top: 2px solid red;
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🔥 BUTTON SMASHER 🔥</h1>
+<p>Reach <b>100,000 points</b> to WIN 🏆</p>
+
+<button id="smashBtn">SMASH!</button>
+
+<div class="stat">💥 Points: <span id="points">0</span></div>
+<div class="stat">⚡ Multiplier: <span id="multi">1x</span></div>
+
+<div id="shop">
+  <h2>🛒 SHOP</h2>
+  <p>Buy 2× Points (Cost: 50 points)</p>
+  <button id="buy2x">BUY 2×</button>
+</div>
+
+<script>
+  let points = 0;
+  let multiplier = 1;
+
+  const smashBtn = document.getElementById("smashBtn");
+  const buy2xBtn = document.getElementById("buy2x");
+  const pointsEl = document.getElementById("points");
+  const multiEl = document.getElementById("multi");
+
+  smashBtn.onclick = () => {
+    points += multiplier;
+    pointsEl.textContent = points;
+
+    if (points >= 100000) {
+      smashBtn.disabled = true;
+      buy2xBtn.disabled = true;
+      alert("🏆 YOU WIN! 100,000 POINTS REACHED!");
+    }
+  };
+
+  buy2xBtn.onclick = () => {
+    if (points >= 50) {
+      points -= 50;
+      multiplier *= 2;   // STACKABLE
+      pointsEl.textContent = points;
+      multiEl.textContent = multiplier + "x";
+    } else {
+      alert("Not enough points!");
+    }
+  };
+</script>
+
+</body>
+</html>
